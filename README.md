@@ -1,4 +1,4 @@
 **GROUP**<br>
-Elsa Jean Lumacang
-Felmar Alfonso
-Marie Corage
+Elsa Jean Lumacang<br>
+Felmar Alfonso<br>
+Marie Corage<br>
