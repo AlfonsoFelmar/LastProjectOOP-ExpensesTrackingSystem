@@ -133,6 +133,28 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
         }
         
     }
+        
+        
+                public void executeSQLQuery102(String query, String message) {
+        
+        try{
+            stmt=con.createStatement();
+            
+            if(stmt.executeUpdate(query)==1){
+                JOptionPane.showMessageDialog(null, message);
+
+        
+                
+                        
+            }else{
+                 JOptionPane.showMessageDialog(null, "Could not execute query");
+            }
+            
+        }catch(HeadlessException | SQLException error){
+            error.printStackTrace();
+            sqlinterfce.onError(error.getMessage());
+        }
+    }
     
         private void executeSQLQuery1(String query, String message) {
         
@@ -597,6 +619,7 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -652,6 +675,7 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
         jLabel28 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jButton9 = new javax.swing.JButton();
         time = new javax.swing.JLabel();
         date = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
@@ -748,9 +772,19 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
         jLabel1.setText("Expenses  ");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
         jLabel2.setText("System");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(128, 137, 92));
         jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
@@ -814,6 +848,19 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
         jLabel3.setText("Tracking");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+
+        jToggleButton1.setBackground(new java.awt.Color(128, 137, 92));
+        jToggleButton1.setText("Update");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -830,8 +877,10 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)))
+                            .addComponent(jLabel3)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addComponent(jButton6)))
@@ -846,7 +895,9 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
                 .addComponent(jLabel3)
                 .addGap(0, 0, 0)
                 .addComponent(jLabel2)
-                .addGap(64, 64, 64)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
@@ -869,7 +920,6 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
         jLabel4.setIcon(new javax.swing.ImageIcon("/Users/felmaralfonso/Downloads/pictures/63481-removebg-preview (1) (1).png")); // NOI18N
 
         jLabel5.setBackground(new java.awt.Color(153, 51, 255));
-        jLabel5.setIcon(new javax.swing.ImageIcon("/Users/felmaralfonso/Downloads/pictures/63481-removebg-preview (1).png")); // NOI18N
 
         jLabel6.setIcon(new javax.swing.ImageIcon("/Users/felmaralfonso/Downloads/pictures/coins-f1.png")); // NOI18N
 
@@ -902,8 +952,7 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addGap(0, 0, 0))
+                .addComponent(jLabel5))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1213,7 +1262,7 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 771, Short.MAX_VALUE)
+            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -1370,6 +1419,13 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
         jTextArea1.setSize(new java.awt.Dimension(220, 89));
         jScrollPane1.setViewportView(jTextArea1);
 
+        jButton9.setText("Save Text");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -1379,10 +1435,13 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1015, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(145, 145, 145)
+                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1401, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1391,13 +1450,13 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 806, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 806, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(jScrollPane1)))
-                .addGap(0, 0, 0))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton9)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         time.setFont(new java.awt.Font("Wide Latin", 0, 18)); // NOI18N
@@ -1423,7 +1482,7 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 999, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel10Layout.createSequentialGroup()
@@ -1900,13 +1959,13 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
 
         jLabel43.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel43.setForeground(new java.awt.Color(55, 61, 63));
-        jLabel43.setText("Title");
+        jLabel43.setText("Title:");
 
         lbl_title.setForeground(new java.awt.Color(204, 0, 0));
 
         jLabel44.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel44.setForeground(new java.awt.Color(55, 61, 63));
-        jLabel44.setText("Description");
+        jLabel44.setText("Description:");
 
         description22.setColumns(20);
         description22.setRows(5);
@@ -1951,7 +2010,7 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
 
         jLabel45.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel45.setForeground(new java.awt.Color(55, 61, 63));
-        jLabel45.setText("ID");
+        jLabel45.setText("ID:");
 
         javax.swing.GroupLayout jPanel2000Layout = new javax.swing.GroupLayout(jPanel2000);
         jPanel2000.setLayout(jPanel2000Layout);
@@ -2003,7 +2062,7 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
                 .addGap(3, 3, 3)
                 .addComponent(lbl_description)
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2000Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2088,7 +2147,7 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
 
         jLabel47.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel47.setForeground(new java.awt.Color(55, 61, 63));
-        jLabel47.setText("Title");
+        jLabel47.setText("Title:");
 
         nameee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2100,7 +2159,7 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
 
         jLabel48.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel48.setForeground(new java.awt.Color(55, 61, 63));
-        jLabel48.setText("Description");
+        jLabel48.setText("Description:");
 
         lbl_description1.setForeground(new java.awt.Color(255, 0, 0));
 
@@ -2113,7 +2172,7 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
 
         jLabel49.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel49.setForeground(new java.awt.Color(55, 61, 63));
-        jLabel49.setText("ID");
+        jLabel49.setText("ID:");
 
         descriptionnn.setColumns(20);
         descriptionnn.setRows(5);
@@ -2136,7 +2195,7 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
                                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel49)
                                     .addComponent(lbl_title1)
-                                    .addComponent(jLabel47))
+                                    .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(idddddd, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nameee, javax.swing.GroupLayout.Alignment.LEADING))
@@ -2643,6 +2702,36 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
         descriptionnn.setText("");
     }//GEN-LAST:event_clear3ActionPerformed
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        jTabbedPane1.setSelectedIndex(0);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        jTabbedPane1.setSelectedIndex(0);
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        jTabbedPane1.setSelectedIndex(0);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+         try {
+                
+            String text = jTextArea1.getText();
+            String query="insert into Text(text) values ('"+text+"') ";
+            executeSQLQuery102(query, "Notes Updated!");         
+            String sql = "SELECT * FROM Text";
+            
+            jTextArea1.setText(sql);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        dispose();
+        new MainFrame().setVisible(true);
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2713,6 +2802,7 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2799,6 +2889,7 @@ public class MainFrame extends javax.swing.JFrame implements QueryInterfce{
     private javax.swing.JTable jTable_categories;
     private javax.swing.JTable jTable_categoriess;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel label_loss;
     private javax.swing.JLabel label_loss1;
     private javax.swing.JLabel label_loss2;
